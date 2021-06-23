@@ -152,6 +152,23 @@ filename formed from the base name of loaded engine files. This value affects th
 the automatically started main pack. The :js:attr:`executable` override option can be
 used to override this value.
 
+Here is a short example for loading additionals files. In this case the file "my_text.txt" is loaded in
+when while the engine starts up.
+::
+    Engine.load(MAIN_PACK)
+    engine.preloadFile('$GODOT_BASENAME.js')
+    engine.preloadFile('$GODOT_BASENAME.pck')
+    engine.preloadFile('$GODOT_BASENAME.png')
+    engine.preloadFile('$GODOT_BASENAME.wasm')
+    engine.preloadFile('my_text.txt')
+    engine.init()
+    setStatusMode('indeterminate');
+    engine.setCanvas(canvas);
+    engine.start().then(() => {
+    	setStatusMode('hidden');
+    	initializing = true;
+    }, displayFailureNotice);
+
 Customizing the presentation
 ----------------------------
 Several configuration options can be used to further customize the look and behavior of the game on your page.
